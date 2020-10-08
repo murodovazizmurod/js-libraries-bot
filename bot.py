@@ -1,12 +1,8 @@
 import requests
-
-
-# print(requests.get("https://api.cdnjs.com/libraries?search=vue").json()["results"][0]["author"])
 import ast
 import telebot
 from telebot import types
 
-# ast.literal_eval(call.data)[1]
 
 polular = ["Vue", "Angular", "React", "Polymer", "Aurelia", "Backbone.js", "Mithril"]
 
@@ -56,12 +52,6 @@ def callback_inline(call):
     if call.message:
         if call.data.startswith("['get'"):
             lib = str(ast.literal_eval(call.data)[1])
-            # if lib == "React":
-            #     data = requests.get(main+lib.lower()).json()
-            # else:
-            #     data = requests.get(query+lib.lower()).json()["results"][0]
-            # print(data)
-            # if len(data):
             detail = requests.get(main+str(lib).lower()).json()
             try:
                 tags = ''
@@ -100,12 +90,6 @@ def find(message):
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("🏘", callback_data="['home']"))
         markup.add(types.InlineKeyboardButton("🔄 Попробовать еще раз", callback_data="['find']"))
-        # tags = ''
-        # if detail["keywords"]:
-        #     for i in list(detail["keywords"]):
-        #         tags = tags + ' ' + i
-        # else:
-        #     tags = "js library"
         bot.reply_to(message, text=f'<b>Name:</b> {detail["name"].title() or "Not Found"}\n<b>Description:</b> <code>{detail["description"] or "Not Found"}</code> \nRepository: <a href=\"{detail["repository"]["url"] or "Not Found"}\">{detail["repository"]["url"] or "Not Found"}</a>\n<b>Home Page: </b> {detail["homepage"] or "Not Found"}\n<b>Author: </b>{detail["author"].replace("<", "").replace(">", "") or "Not Found"}\n<b>Latest Version: </b><code>{detail["versions"][-1] or "Not Found"}</code>', reply_markup=markup, parse_mode="html")
     except:
         bot.reply_to(message,
@@ -116,7 +100,3 @@ def find(message):
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
-
-
-# with open("image.jpg", 'wb') as f:
-#     f.write(requests.get("https://quickchart.io/qr?text=Assalom").content)
