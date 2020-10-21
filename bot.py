@@ -81,7 +81,7 @@ def callback_inline(call):
 Например: `angular, vue, react ...`""", parse_mode="Markdown", reply_markup=naz())
             bot.register_next_step_handler(msg, find)
         elif call.data == "['author']":
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id , text="Support @murodov_azizmurod", parse_mode="Markdown", reply_markup=naz())
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id , text="Support @murodov_azizmurod", reply_markup=naz())
 
     
 def find(message):
