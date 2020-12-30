@@ -36,7 +36,7 @@ def naz():
     markup.add(types.InlineKeyboardButton("🏘", callback_data="['home']"))
     return markup
 
-bot = telebot.TeleBot("1399782659:AAETzUF8L_NmGwZR3DhbAA3AVuFbk1oKXzE")
+bot = telebot.TeleBot("TOKEN")
 
 main = "https://api.cdnjs.com/libraries/"
 
